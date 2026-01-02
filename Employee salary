@@ -1,0 +1,22 @@
+create database Employee;
+use Employee;
+CREATE TABLE employee (
+    Employee_id INT PRIMARY KEY,
+    Employee_name VARCHAR(100),
+    Salary float
+);
+INSERT INTO employee VALUES(1,'Ravi',60000),(2,'Anitha',55000),(3,'Suresh ',60000),(4,'Priya',48000);
+DELIMITER $$
+
+CREATE PROCEDURE getEmployeeSalary(INOUT emp_salary INT, IN emp_id INT)
+BEGIN
+    SELECT Salary
+    INTO emp_salary
+    FROM employee
+    WHERE Employee_id =1;
+    END$$
+
+DELIMITER ;
+SET @salary=0;
+CALL getEmployeeSalary(@salary, 1);
+SELECT @salary;
