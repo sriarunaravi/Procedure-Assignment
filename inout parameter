@@ -1,0 +1,19 @@
+create database StudentsProcedure;
+use StudentsProcedure;
+CREATE TABLE StudentsProcedure(
+    Student_ID INT AUTO_INCREMENT PRIMARY KEY,  
+    Student_Name VARCHAR(100) NOT NULL,         
+    Student_Marks INT NOT NULL          
+);
+INSERT INTO StudentsProcedure(Student_Name,Student_Marks)VALUES ('Nigazhini',95),('Mithra',90),('Mithran',78),('Riya',92);
+select *from StudentsProcedure;
+DELIMITER $$
+CREATE PROCEDURE GetStudentMarksByName(IN studentName VARCHAR(100),OUT studentMarks INT)
+BEGIN
+    SELECT Student_Marks INTO studentMarks
+    FROM StudentsProcedure
+    WHERE Student_Name='Mithra';
+END $$
+DELIMITER ;
+CALL GetStudentMarksByName('Mithra',@marks);
+SELECT @marks AS StudentMarks;
